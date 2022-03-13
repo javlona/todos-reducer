@@ -1,23 +1,22 @@
-import logo from './logo.svg';
+import React, { useContext, useState } from 'react';
+import Todos from './store/Context'
 import './App.css';
 
 function App() {
+  const [state, dispatch, submitHandler] = useContext(Todos);
+  const [value, setValue] = useState('')
+  
+  console.log(state)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form onSubmit={submitHandler}>
+        <input 
+          type="text" 
+          className="form__input" 
+          value={value} 
+          onChange={ e => setValue(e.target.value)}
+          />
+      </form>
     </div>
   );
 }
