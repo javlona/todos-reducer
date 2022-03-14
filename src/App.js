@@ -7,22 +7,28 @@ import ShowTodos from "./Components/ShowTodos";
 function App() {
   const [state, dispatch] = useContext(Todos);
   const [value, setValue] = useState("");
+  const [hasError, setHasError] = useState(false)
 
   const newTodo = (name) => {
-    return {
-      id: Date.now(),
-      name,
-      completed: false,
-    };
+      return {
+        id: Date.now(),
+        name,
+        completed: false,
+      };
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch({
-      type: ADD_TODO,
-      payload: newTodo(value),
-    });
-    setValue("");
+    if(value.length) {
+      setHasError(false)
+      dispatch({
+        type: ADD_TODO,
+        payload: newTodo(value),
+      });
+      setValue("");
+    } else {
+      setHasError(true);
+    }
   };
 
   return (
@@ -35,8 +41,11 @@ function App() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
+        {
+          hasError && <p style={{color: 'red'}}>Please write something</p>
+        }
       </form>
-      {state.map((item) => (
+      {state?.map((item) => (
         <ShowTodos 
           key={item.id} 
           todo={item} 
