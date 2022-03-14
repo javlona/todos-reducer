@@ -7,18 +7,10 @@ const Todos = createContext()
 function TodosContext(props) {
     const [state, dispatch] = useReducer(reducer, [])
 
-    const submitHandler = (e) => {
-        e.preventDefault()
-        dispatch({
-            type: ADD_TODO,
-            payload: state
-        })
-    }
   return (
     <Todos.Provider value={[
         state,
         dispatch,
-        submitHandler
     ]}>
         {props.children}
     </Todos.Provider>

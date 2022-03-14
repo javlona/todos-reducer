@@ -1,6 +1,6 @@
 export const ADD_TODO = 'addTodos';
 export const DELETE_TODO = 'deleteTodos';
-export const UPDATE_TODO = 'updateTodos'
+export const COMPLETE_TODO = 'updateTodos'
 
 function reducer (state, action){
     switch(action.type){
@@ -9,8 +9,8 @@ function reducer (state, action){
         case DELETE_TODO:
             const filtered = state.filter(item => item.id !== action.payload)
             return filtered
-        case UPDATE_TODO:
-            const updated = state.map(item => item.id === action.payload.id ? {...item, ...action.payload} : item)
+        case COMPLETE_TODO:
+            const updated = state.map(item => item.id === action.payload.id ? {...item, completed: !item.completed} : item)
             return [...updated]
         default:
             return state
