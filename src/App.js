@@ -25,10 +25,9 @@ function App() {
     setValue("");
   };
 
-  console.log(value);
-  console.log("state", state);
   return (
     <div className="App">
+      <h3>TODO APP</h3>
       <form onSubmit={submitHandler}>
         <input
           type="text"
